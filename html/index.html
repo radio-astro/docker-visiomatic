@@ -2,9 +2,6 @@
 <html lang="en">
     <head>
         <meta charset='utf-8' name='viewport' content='width=device-width,initial-scale=1,maximum-scale=1'>
-        <!--
-        <link rel="stylesheet" href="jQuery/jquery-ui.css" />
-        -->
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
         <link rel='stylesheet' href='visiomatic/dist/jqplot/jquery.jqplot.css' />
         <link rel='stylesheet' href='visiomatic/dist/spectrum.css' />
@@ -33,17 +30,17 @@
         <script src='visiomatic/dist/visiomatic-src.js'></script>
     </head>
 
-    var map = L.map('map', {fullscreenControl: true, fadeAnimation: false});
-     var iip = '/fcgi-bin/iipsrv.fcgi?FIF=image.ptif';
-     var ima = L.tileLayer.iip(iip, {cmap: 'jet'}).addTo(map);
-
-
     <body>
         <div id='map' style='background:black'></div>
         <script type="text/javascript">
+            var url = '/iipsrv-astro/?FIF='
+            var filename = 'PalaisDuLouvre.tif';
+            if (window.location.hash) {
+                filename = window.location.hash.replace('#', '');
+            };
+
             var map = L.map('map', {fullscreenControl: true, fadeAnimation: false});
-            var iip = '/iipsrv-astro/?FIF=PalaisDuLouvre.tif';
-            var ima = L.tileLayer.iip(iip).addTo(map);
+            var ima = L.tileLayer.iip(url + filename).addTo(map);
 
             var baseLayers = {
                 'My image': ima
